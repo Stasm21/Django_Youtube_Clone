@@ -10,8 +10,8 @@ from rest_framework import status
 
 class GetComment(APIView):
 
-    def get(self, request, videoId):
-        allCommentsAndLikes = CommentsAndLikes.objects.filter(videoId=videoId)
+    def get(self, request, video_id):
+        allCommentsAndLikes = CommentsAndLikes.objects.filter(video_id=video_id)
         serializer = InfoSerializer(allCommentsAndLikes, many=True)
         return Response(serializer.data)
 
@@ -26,8 +26,8 @@ class CommentList(APIView):
 
 class AddLike(APIView):
 
-    def patch(self, request, videoId):
-        like = CommentsAndLikes.objects.get(videoId=videoId)
+    def patch(self, request, video_id):
+        like = CommentsAndLikes.objects.get(video_id=video_id)
         like.likes += 1
         like.save()
         return Response(status=status.HTTP_200_OK)
